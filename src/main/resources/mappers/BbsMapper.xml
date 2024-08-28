@@ -20,9 +20,17 @@
     <!-- getRow --> 
 
     <select id="getRow" 
-            parameterType="com.example.springweb.test.domain.BbsRequestDTO"
+            parameterType="java.util.HashMap"
             resultType="com.example.springweb.test.domain.BbsResponseDTO">
         select id, title, content
         from TB_BBS
         where id = #{id}
-    </select></mapper>
+    </select>
+    <!-- deleteRow --> 
+
+    <delete id="deleteRow"
+            parameterType="java.util.HashMap">
+        DELETE FROM TB_BBS
+        WHERE ID = #{id}
+    </delete>
+</mapper>

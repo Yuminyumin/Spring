@@ -7,8 +7,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.example.springweb.test.domain.BbsRequestDTO;
 import com.example.springweb.test.domain.BbsResponseDTO;
 import com.example.springweb.test.mapper.BbsMapper;
-import java.util.List;
 
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 @SpringBootTest
 public class MybatisApplicationTests {
     
@@ -34,5 +36,22 @@ public class MybatisApplicationTests {
         for(BbsResponseDTO dto : list) {
             System.out.println(dto);
         }
+    }
+    @Test
+    public void selectOne(){
+        System.out.println("debug mapper >>>> "+ bbsMapper);
+        Map<String, Integer>map = new HashMap<>();
+        map.put("id",2);
+        BbsResponseDTO response = bbsMapper.getRow(map);
+        System.out.println("debug >>> select One "+ response);
+    }
+
+    @Test
+    public void deleteTest(){
+        System.out.println("debug mapper >>>> "+ bbsMapper);
+        Map<String, Integer>map = new HashMap<>();
+        map.put("id",2);
+        bbsMapper.deleteRow(map);
+        System.out.println("debug >>> delete Ok!!");
     }
 }
