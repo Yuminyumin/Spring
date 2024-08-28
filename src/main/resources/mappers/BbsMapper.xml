@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.springweb.test.mapper.BbsMapper">
+
+    <insert id="saveRow"
+            parameterType="com.example.springweb.test.domain.BbsRequestDTO">
+        INSERT INTO TB_BBS(TITLE, CONTENT)
+        VALUES(#{title}, #{content})
+    </insert>
+
+    <!-- selectRow-->
+
+    <select id="selectRow"
+            resultType="com.example.springweb.test.domain.BbsResponseDTO">
+        SELECT ID, TITLE, CONTENT
+        FROM TB_BBS
+    </select>
+
+    <!-- getRow --> 
+
+    <select id="getRow" 
+            parameterType="com.example.springweb.test.domain.BbsRequestDTO"
+            resultType="com.example.springweb.test.domain.BbsResponseDTO">
+        select id, title, content
+        from TB_BBS
+        where id = #{id}
+    </select></mapper>
