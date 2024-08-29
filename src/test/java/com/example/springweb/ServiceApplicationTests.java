@@ -6,8 +6,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.springweb.test.domain.BbsRequestDTO;
 import com.example.springweb.test.service.BbsService;
-import java.util.Map;
-import java.util.HashMap;
 
 @SpringBootTest
 public class ServiceApplicationTests {
