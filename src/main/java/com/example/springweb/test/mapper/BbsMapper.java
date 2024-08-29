@@ -21,4 +21,6 @@ public interface BbsMapper {
     public BbsResponseDTO getRow(Map<String, Integer>map);
 
     public void deleteRow(Map<String, Integer> map);
+
+    public void updateRow(BbsRequestDTO params);
 }
