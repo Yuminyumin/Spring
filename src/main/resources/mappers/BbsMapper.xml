@@ -42,5 +42,22 @@
         SET TITLE= #{title}, CONTENT= #{content}
         where ID = #{id}
     </update>
-    
+
+    <!-- commentSaveRow --> 
+
+    <insert id="commentSaveRow"
+            parameterType = "com.example.springweb.test.domain.comment.CommentRequestDTO">
+        INSERT INTO TB_COMMENT(CONTENT, BBSID)
+        VALUES(#{content}, #{bbsid})
+    </insert>    
+
+    <!-- commentSelectRow --> 
+
+    <select id="commentSelectRow"
+            parameterType="java.util.HashMap"
+            resultType="com.example.springweb.test.domain.comment.CommentResponseDTO">
+        SELECT ID, CONTENT, BBSID
+        FROM   TB_COMMENT
+        WHERE  BBSID = #{id}
+    </select>
 </mapper>

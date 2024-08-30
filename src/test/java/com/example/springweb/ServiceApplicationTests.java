@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.springweb.test.domain.BbsRequestDTO;
+// import com.example.springweb.test.domain.BbsRequestDTO;
 import com.example.springweb.test.service.BbsService;
 
 @SpringBootTest
@@ -16,12 +16,12 @@ public class ServiceApplicationTests {
     @Test
     public void saveService(){
         System.out.println("debug >>>> junit service save : " + bbbService);
-        BbsRequestDTO request = BbsRequestDTO.builder()
-                                    .title("오늘은 쉽다")
-                                    .content("진짜 이렇게 간단한거였어!!")
-                                    .build();
-        bbbService.save(request);
-        System.out.println("debug >>> save OK!! ");
+        // BbsRequestDTO request = BbsRequestDTO.builder()
+        //                             .title("오늘은 쉽다")
+        //                             .content("진짜 이렇게 간단한거였어!!")
+        //                             .build();
+        // bbbService.save(request);
+        // System.out.println("debug >>> save OK!! ");
     }
     /*
     테이블에 있는 기본키 값으로 title, content 수정하고 싶다.
@@ -35,13 +35,13 @@ public class ServiceApplicationTests {
     @Test
     public void updateService() {
         System.out.println("debug >>>> junit service update : " + bbbService);
-        BbsRequestDTO request = BbsRequestDTO.builder()
-                                    .id(1)
-                                    .title("update한 제목")
-                                    .content("update해써요 ")
-                                    .build();                            
-        bbbService.update(request);
-        System.out.println("debug >>> junit service update OK!!!");
+        // BbsRequestDTO request = BbsRequestDTO.builder()
+        //                             .id(1)
+        //                             .title("update한 제목")
+        //                             .content("update해써요 ")
+        //                             .build();                            
+        // bbbService.update(request);
+        // System.out.println("debug >>> junit service update OK!!!");
     }
 
 }

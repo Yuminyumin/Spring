@@ -3,8 +3,8 @@ package com.example.springweb.test.ctrl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+// import org.springframework.web.bind.annotation.RequestMethod;
+// import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.springweb.test.domain.BbsResponseDTO;
@@ -29,12 +29,13 @@ public class TestController {
     @RequestMapping("/api/bbs/ctrl/test")
     @ResponseBody//json화 시켜주는 어노테이션
     public  BbsResponseDTO test() {
-        BbsResponseDTO response = BbsResponseDTO.builder()
-                                    .id(1)
-                                    .title("test")
-                                    .content("test")
-                                    .build();
-        return response;
+        // BbsResponseDTO response = BbsResponseDTO.builder()
+        //                             .id(1)
+        //                             .title("test")
+        //                             .content("test")
+        //                             .build();
+        // return response;
+        return null;
     }
     
 }

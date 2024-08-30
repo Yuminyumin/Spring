@@ -1,6 +1,7 @@
 package com.example.springweb.test.ctrl;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,10 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.springweb.test.domain.BbsRequestDTO;
 import com.example.springweb.test.domain.BbsResponseDTO;
+import com.example.springweb.test.domain.comment.CommentRequestDTO;
 import com.example.springweb.test.service.BbsService;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -34,12 +35,13 @@ public class BbsController {
     // user : http://localhost:7777/api/bbs/test
     @GetMapping("/test")
     public ResponseEntity<BbsResponseDTO> test() {
-        BbsResponseDTO response = BbsResponseDTO.builder()
-                                    .id(1)
-                                    .title("test")
-                                    .content("test")
-                                    .build();
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        // BbsResponseDTO response = BbsResponseDTO.builder()
+        //                             .id(1)
+        //                             .title("test")
+        //                             .content("test")
+        //                             .build();
+        // return new ResponseEntity<>(response, HttpStatus.OK);
+        return null;
     }
 
     /*
@@ -72,31 +74,58 @@ public class BbsController {
     Bbs 데이터 조회
     */
     @GetMapping("/view/{id}")
-    public ResponseEntity<BbsResponseDTO> view(@PathVariable(name="id") Integer id) {
+    public ResponseEntity<Object> view(@PathVariable(name="id") Integer id) {
         System.out.println("debug >>> bbs controller client path /view");
         System.out.println("debug >>> id param value " + id);
         Map<String, Integer> map = new HashMap<>();
         map.put("id", id);
 
-        BbsResponseDTO response = bbsService.select(map);
+        Optional<BbsResponseDTO> response = bbsService.select(map);
+        if(response.isPresent()){
+            return new ResponseEntity<>(response.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("에러 발생", HttpStatus.OK);
+        }
         
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        
     }
 
     /*
     Bbs 새 글을 작성
     user endpoint http://localhost:7777/api/bbs/post?title=xxxx&content=xxxx
     */
-    @PostMapping("/post")
-    public ResponseEntity<String> save(@RequestParam("title")   String title,
-                                       @RequestParam("content") String content) {
-        BbsRequestDTO params = BbsRequestDTO.builder()
-                                            .title(title)
-                                            .content(content)
-                                            .build();
+    // @PostMapping("/post")
+    // public ResponseEntity<String> save(@RequestParam("title")   String title,
+    //                                    @RequestParam("content") String content) {
+    //     BbsRequestDTO params = BbsRequestDTO.builder()
+    //                                         .title(title)
+    //                                         .content(content)
+    //                                         .build();
         
-        System.out.println(">>>>>>>>>>>>> request dto, "+params);
-        return null;
+    //     System.out.println(">>>>>>>>>>>>> request dto, "+params);
+    //     return null;
+    // }
+    
+    @PostMapping("/post")
+    public ResponseEntity<Void> save(BbsRequestDTO params) {
+        System.out.println("debug >>> bbs controller client path/ post");
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>request dto, " + params);
+        bbsService.save(params);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
+
+    //////////////////coment
+    // comment 새 글을 작성
+    // user endpoint : http://localhost:7777/api/bbs/comment/post?content=xxxx&bbsid=xxxx
+
+    @PostMapping("/comment/save")
+    public ResponseEntity<String> postMethodName(CommentRequestDTO params) {
+        System.out.println("debug >>> bbs controller client path /comment/post");
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>request dto, " + params);
+        bbsService.commentSave(params);
+        return new ResponseEntity<String>(params.getBbsid()+"에 타임라인 등록 완료!!",HttpStatus.OK);
+    }
+    
+    
     
 }

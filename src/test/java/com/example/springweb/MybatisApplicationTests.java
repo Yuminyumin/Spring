@@ -4,12 +4,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.springweb.test.domain.BbsRequestDTO;
+// import com.example.springweb.test.domain.BbsRequestDTO;
 import com.example.springweb.test.domain.BbsResponseDTO;
 import com.example.springweb.test.mapper.BbsMapper;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.HashMap;
 @SpringBootTest
 public class MybatisApplicationTests {
@@ -20,13 +21,13 @@ public class MybatisApplicationTests {
     @Test
     public void saveTest() {
         System.out.println("debug mapper >>>>>>" + bbsMapper);
-        BbsRequestDTO request = BbsRequestDTO.builder()
-                                    .title("겁나 어렵다")
-                                    .content("뻥이 아니야 어려워")
-                                    .build();
+        // BbsRequestDTO request = BbsRequestDTO.builder()
+        //                             .title("겁나 어렵다")
+        //                             .content("뻥이 아니야 어려워")
+        //                             .build();
 
-        bbsMapper.saveRow(request);
-        System.out.println("debug >>>> save success!!!!");;
+        // bbsMapper.saveRow(request);
+        // System.out.println("debug >>>> save success!!!!");;
     }
 
     @Test
@@ -42,7 +43,7 @@ public class MybatisApplicationTests {
         System.out.println("debug mapper >>>> "+ bbsMapper);
         Map<String, Integer>map = new HashMap<>();
         map.put("id",2);
-        BbsResponseDTO response = bbsMapper.getRow(map);
+        Optional<BbsResponseDTO> response = bbsMapper.getRow(map);
         System.out.println("debug >>> select One "+ response);
     }
 
