@@ -18,7 +18,13 @@ import com.example.springweb.test.domain.BbsRequestDTO;
 import com.example.springweb.test.domain.BbsResponseDTO;
 import com.example.springweb.test.domain.comment.CommentRequestDTO;
 import com.example.springweb.test.service.BbsService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -27,6 +33,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RestController
 // user : http://localhost:7777/api/bbs
 @RequestMapping("api/bbs")
+@Tag(name="BBS API", description = "게시글 관련 API 목록")
 public class BbsController {
     
     @Autowired
@@ -49,6 +56,7 @@ public class BbsController {
      * service - mapper 연동을 통한 삭제 구현
      */
     @DeleteMapping("/delete/{id}")
+    @Operation(summary = "게시글 삭제", description = "게시글 키값을 가지고 삭제한다")
     public ResponseEntity<String> delete(@PathVariable(name="id") Integer id) {
         System.out.println("debug >>> bbs controller client path /delete");
         System.out.println("debug >>> id param value " + id);
@@ -114,6 +122,13 @@ public class BbsController {
         return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<Void> update(BbsRequestDTO params) {
+        System.out.println("debug >>> bbs controller client path/ update");
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>request dto, " + params);
+        bbsService.update(params);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+    }
     //////////////////coment
     // comment 새 글을 작성
     // user endpoint : http://localhost:7777/api/bbs/comment/post?content=xxxx&bbsid=xxxx
